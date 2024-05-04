@@ -1,17 +1,16 @@
 <?php
 
-class UserController {
+class UserController
+{
     private $userModel;
+    private $username;
+    private $password;
+    private $error; // New property to store error messages
 
-    public function __construct(UserModel $userModel) {
+    public function __construct(UserModel $userModel)
+    {
         $this->userModel = $userModel;
     }
-    // public function login(){
-    //     // do whatever needed in database interaction + handle input from user then send login view page if not logged in
-    //     if($_POST['login'])
-    //     require_once("./php/views/login.php");
-    // }
-
 
     public function showLoginForm()
     {
@@ -25,39 +24,35 @@ class UserController {
             if ($this->login() === true) {
                 header('Location:/CapstoneWebsite/dashboard');
             } else {
+                $this->error = "Incorrect username or password. Please try again.";
+                $error = $this->error;
+                $username = isset($this->username) ? $this->username : '';
+                $password = isset($this->password) ? $this->password : '';
                 include 'php/views/login.php';
             }
         } else {
+            $username = isset($this->username) ? $this->username : '';
+            $password = isset($this->password) ? $this->password : '';
             include 'php/views/login.php';
         }
     }
 
     public function login()
     {
-        // Check if the form is submitted
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->username = $_POST['username'];
+            $this->password = $_POST['password'];
 
-            $user = array("username" => $_POST['username'], "password" => $_POST['password']);
+            $user = array("username" => $this->username, "password" => $this->password);
 
             if ($this->userModel->loginUser($user)) {
                 session_start();
-                $_SESSION["username"] = $_POST['username'];
+                $_SESSION["username"] = $this->username;
                 return true;
             } else {
                 return false;
             }
-
         }
     }
-
-
-
-
-
-
-
-    // public function showUserProfile($userId) {
-    //     $user = $this->userModel->getUserById($userId);
-    //     include 'src/views/profile.php';  // Pass control to the view
-    // }
 }
+?>

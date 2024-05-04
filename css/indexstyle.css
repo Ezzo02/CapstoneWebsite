@@ -178,6 +178,12 @@ img {
   font-size: var(--small-font-size);
 }
 
+.login__form .error{
+  color: red !important;
+  padding-bottom: 20px;
+  font-size: var(--small-font-size) !important;
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For medium devices */
 @media screen and (min-width: 576px) {
