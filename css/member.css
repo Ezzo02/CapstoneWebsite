@@ -1,0 +1,101 @@
+body {
+    background: linear-gradient(to bottom right, #B71C1C, #9C27B0); /* Red gradient */
+    background-image: url('../images/bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Lato', sans-serif; /* Added font family */
+}
+
+.profile .card {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9); /* Added background color with opacity */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Added box shadow */
+}
+
+.profile .card .card-header .profile_img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px auto;
+    border: 8px solid #B71C1C; /* Red border */
+    border-radius: 50%;
+}
+
+.profile .card h3 {
+    font-size: 20px;
+    font-weight: 700; /* Adjusted font weight */
+    color: #000; /* Added text color */
+}
+
+.profile .card p {
+    font-size: 16px;
+    color: #000;
+}
+
+.profile .table th,
+.profile .table td {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #000;
+}
+
+section {
+    padding: 4em;
+}
+
+/* New styles for member events section */
+.member-events {
+    margin-top: 40px;
+}
+
+.member-events .card {
+    background-color: rgba(255, 255, 255, 0.9); /* Added background color with opacity */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Added box shadow */
+}
+
+.member-events .card-header h3 {
+    font-size: 20px;
+    font-weight: 700; /* Adjusted font weight */
+    color: #000; /* Added text color */
+    margin-bottom: 20px;
+}
+
+.member-events .card-body {
+    padding: 20px;
+}
+
+.member-events ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.member-events ul li {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.progress {
+    height: 25px;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #B71C1C; /* Red background color */
+    border-radius: 10px; /* Added border radius */
+}
+
+.red-button {
+    background-color: #B71C1C;
+    border-color: #B71C1C;
+}
+
+.btn-primary:hover {
+    background-color: #8B0000; /* Dark red */
+    border-color: #8B0000; /* Dark red */
+}
