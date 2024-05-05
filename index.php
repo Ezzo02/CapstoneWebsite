@@ -19,7 +19,7 @@ $EventsModel = new EventsModel($conn);
 //controllers require + initialization
 require_once("./php/controllers/UsersController.php");
 require_once("./php/controllers/EventsController.php");
-$UserController = new UserController($UserModel);
+$UserController = new UserController($UserModel,$EventsModel);
 $EventsController = new EventsController($EventsModel,$UserModel);
 
 // echo $route;
@@ -37,13 +37,24 @@ switch ($route) {
         header('Location:/CapstoneWebsite/login');
         break; 
     case 'dashboard':
+        session_start();
+        if(empty($_SESSION['role'])){
+            header('Location:/CapstoneWebsite/login');
+            break;    
+        }
+        $users = $UserModel->getUsers();
         $events = $EventsModel->getEvents();
         include_once("./php/views/dashboard.php");
+        break;
+    case 'profile':
+        $UserController->showProfilePageForMembers();
         break;
     case 'events':
         $EventsController->Events_Add_Update();
         break;
-
+    case 'update_profile':
+        $UserController->updateProfile();
+        break;
     default:
         http_response_code(404);
         echo '404 Not Found';

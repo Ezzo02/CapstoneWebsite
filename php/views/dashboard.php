@@ -147,7 +147,16 @@
                 <li>
                     <i class='bx bxs-group'></i>
                     <span class="text">
-                        <h3>2500</h3>
+                        <h3><?php
+                            $totalMembers = 0;
+
+                            foreach ($users as $user) {
+                                if($user['Position']==='member'){
+                                    $totalMembers +=1;
+                                }
+                            }
+                            echo "$totalMembers";
+                            ?></h3>
                         <p>Members</p>
                     </span>
                 </li>

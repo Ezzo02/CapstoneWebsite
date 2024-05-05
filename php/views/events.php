@@ -297,7 +297,7 @@
             <div class="table-data">
                 <div class="order">
                     <div class="head-events">
-                        <h3>Add Events</h3>
+                        <h3>Manage Events Page</h3>
                     </div>
                     <!-- events table -->
                     <div class="table-data">
@@ -323,7 +323,7 @@
                                             <td><?php echo date('F j, Y', strtotime($event['Date_of_Event'])); ?></td>
                                             <td><?php echo $event['Cost_of_Event']; ?>$</td>
                                             <td><?php echo $event['Status_of_Event']; ?></td>
-                                            <td><?php echo $event['Approval_of_Event']; ?></td>
+                                            <td><?php echo $event['Approval_of_Event'] === 1 ? 'Yes' : 'No'; ?></td>
                                             <td>
                                                 <div class="edit-icon"
                                                     data-event-details='<?php echo json_encode($event); ?>'>
@@ -371,16 +371,14 @@
                                 <div class="event__field">
                                     <label>Select Members:</label>
                                     <div class="users-div">
-                                        <div class="users-div">
-                                            <?php foreach ($users as $user): ?>
-                                                <div class="user-parent">
-                                                    <label style="display:inline"
-                                                        for="edit-event-approved"><?php echo $user['Username']; ?></label>
-                                                    <input type="checkbox" name="users[]"
-                                                        value="<?php echo $user['ID']; ?>" />
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
+                                        <?php foreach ($users as $user): ?>
+                                            <div class="user-parent">
+                                                <label style="display:inline"
+                                                    for="edit-event-approved"><?php echo $user['Username']; ?></label>
+                                                <input type="checkbox" name="users[]" value="<?php echo $user['ID']; ?>" />
+                                            </div>
+                                        <?php endforeach; ?>
+
 
                                     </div>
                                 </div>

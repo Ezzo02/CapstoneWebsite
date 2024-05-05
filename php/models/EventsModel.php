@@ -106,6 +106,38 @@ class EventsModel
             return [];
         }
     }
+    public function getEventsofMember($userID)
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT E.Date_of_Event, E.Event_Name
+            FROM events AS E
+            JOIN members_belonging_to_events ON E.ID = members_belonging_to_events.`Event ID`
+            WHERE members_belonging_to_events.`User ID` = :user_id;
+        ");
+            $stmt->bindParam(':user_id', $userID, PDO::PARAM_INT);
+            $stmt->execute();
+            $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $events;
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
+    public function getParticipationPercentage($userID)
+    {
+        $events = $this->getEventsofMember($userID);
+        $eventsTotal = $this->getEvents();
+        // Avoid division by zero error
+        if (count($eventsTotal) == 0) {
+            return 0;
+        }
+
+        $percent = count($events) / count($eventsTotal) * 100;
+
+        return $percent;
+
+    }
 
 
 
