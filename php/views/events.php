@@ -230,21 +230,16 @@
                     <span class="text">Analytics</span>
                 </a>
             </li>
+
             <li>
-                <a href="messages.html">
-                    <i class="bx bxs-message-dots"></i>
-                    <span class="text">Messages</span>
-                </a>
-            </li>
-            <li>
-                <a href="members.html">
+                <a href="/CapstoneWebsite/members">
                     <i class="bx bxs-group"></i>
                     <span class="text">Members</span>
                 </a>
             </li>
             <li class="active">
-                <a href="events.html">
-                    <i class="bx bxs-group"></i>
+                <a href="/CapstoneWebsite/members">
+                <i class="bx bxs-calendar"></i>
                     <span class="text">Events</span>
                 </a>
             </li>

@@ -42,7 +42,7 @@ class EventsController
                 } else {
                     // header('Location: error_page.php'); // Redirect on error
                 }
-                //header('Location: /CapstoneWebsite/events'); // Redirect on success
+                header('Location: /CapstoneWebsite/events'); // Redirect on success
                 
             }
         } else {

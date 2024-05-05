@@ -50,10 +50,27 @@ switch ($route) {
         $UserController->showProfilePageForMembers();
         break;
     case 'events':
+        session_start();
+        if(empty($_SESSION['role'])){
+            header('Location:/CapstoneWebsite/login');
+            break;    
+        }
         $EventsController->Events_Add_Update();
         break;
     case 'update_profile':
         $UserController->updateProfile();
+        break;
+    case 'members':
+        session_start();
+        if(empty($_SESSION['role'])){
+            header('Location:/CapstoneWebsite/login');
+            break;    
+        }
+        $users = $UserModel->getUsers();
+        include_once("php/views/members.php");
+        break;
+    case 'addMember':
+        $UserController->addMember();
         break;
     default:
         http_response_code(404);

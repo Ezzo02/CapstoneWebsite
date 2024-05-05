@@ -52,21 +52,16 @@
                     <span class="text">Analytics</span>
                 </a>
             </li>
+
             <li>
-                <a href="messages.html">
-                    <i class='bx bxs-message-dots'></i>
-                    <span class="text">Messages</span>
-                </a>
-            </li>
-            <li>
-                <a href="members.html">
+                <a href="/CapstoneWebsite/members">
                     <i class='bx bxs-group'></i>
                     <span class="text">Members</span>
                 </a>
             </li>
             <li>
                 <a href="/CapstoneWebsite/events">
-                    <i class='bx bxs-group'></i>
+                    <i class="bx bxs-calendar"></i>
                     <span class="text">Events</span>
                 </a>
             </li>
@@ -148,15 +143,15 @@
                     <i class='bx bxs-group'></i>
                     <span class="text">
                         <h3><?php
-                            $totalMembers = 0;
+                        $totalMembers = 0;
 
-                            foreach ($users as $user) {
-                                if($user['Position']==='member'){
-                                    $totalMembers +=1;
-                                }
+                        foreach ($users as $user) {
+                            if ($user['Position'] === 'member') {
+                                $totalMembers += 1;
                             }
-                            echo "$totalMembers";
-                            ?></h3>
+                        }
+                        echo "$totalMembers";
+                        ?></h3>
                         <p>Members</p>
                     </span>
                 </li>
@@ -199,7 +194,7 @@
                             $i = 0;
                             foreach ($events as $event):
                                 if ($i >= 5)
-                                    break; 
+                                    break;
                                 $i++;
                                 ?>
                                 <tr>

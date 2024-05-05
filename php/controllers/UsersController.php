@@ -108,6 +108,28 @@ class UserController
             exit;
         }
     }
+    public function addMember()
+    {
+        if (isset($_POST['add-member-submit'])) {
+            $membername = $_POST['memberName'];
+            $idNumber = $_POST['idNumber'];
+            $password = $_POST['password'];
+            $joiningdate = $_POST['joiningdate'];
+            $club = $_POST['club'];
 
+            $this->userModel->addMember(
+                $membername,
+                $password,
+                $idNumber,
+                $joiningdate
+                ,
+                $club
+            );
+
+        }
+
+        header('Location: /CapstoneWebsite/members');
+        exit;
+    }
 }
 ?>

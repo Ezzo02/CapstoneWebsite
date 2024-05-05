@@ -125,10 +125,32 @@ class UserModel
                 return false;
             }
         } else {
-            return true; 
+            return true;
         }
     }
+    public function addMember($username, $password, $id, $join_date, $club)
+    {
+        try {
+            $sql = "INSERT INTO users (`Username`, `Password`,`Position`, `Member's ID`, `Joining Date`, `Club`) 
+                    VALUES (:username, :password,:position, :id, :join_date, :club)";
+            $stmt = $this->db->prepare($sql);
 
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+            $stmt->bindValue(':position', 'member', PDO::PARAM_STR);
+            $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+            $stmt->bindParam(':join_date', $join_date, PDO::PARAM_STR);
+            $stmt->bindParam(':club', $club, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+
+            return false;
+        }
+    }
 
 
 }
