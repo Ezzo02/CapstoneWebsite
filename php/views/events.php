@@ -157,7 +157,7 @@
             display: none;
             position: fixed;
             z-index: 100000;
-            top: 20vh;
+            top: 5vh;
             left: 35vw;
 
             min-width: 400px;
@@ -188,6 +188,22 @@
             color: #e1242b;
             text-decoration: none;
             cursor: pointer;
+        }
+
+        .users-div {
+            overflow-x: auto;
+            max-height: 100px;
+            padding: 10px 0px;
+        }
+
+        .users-div .user-parent {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .users-div .user-parent input {
+            margin-right: 40px;
         }
     </style>
 
@@ -352,6 +368,22 @@
                                         <option value="in-progress">In Progress</option>
                                     </select>
                                 </div>
+                                <div class="event__field">
+                                    <label>Select Members:</label>
+                                    <div class="users-div">
+                                        <div class="users-div">
+                                            <?php foreach ($users as $user): ?>
+                                                <div class="user-parent">
+                                                    <label style="display:inline"
+                                                        for="edit-event-approved"><?php echo $user['Username']; ?></label>
+                                                    <input type="checkbox" name="users[]"
+                                                        value="<?php echo $user['ID']; ?>" />
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+
+                                    </div>
+                                </div>
                                 <input type="hidden" id="event-id" name="event-id" value="" />
                                 <button type="submit" class="event__submit" name="update-event-submit"
                                     id="modalSubmitButton">
@@ -384,35 +416,61 @@
         var submitButton = document.getElementById("modalSubmitButton");
         var modalTitle = document.getElementById("modalTitle");
         // Open modal for editing
-        editButtons.forEach((button) => {
-            button.onclick = function () {
-                var eventDetails = JSON.parse(this.getAttribute("data-event-details"));
-                modal.style.display = "block";
-                document.body.style.overflow = "hidden";
-                submitButton.innerHTML = "Update Event";
-                submitButton.name = "update-event-submit";
-                modalTitle.innerText = "Update Event";
+        function openEditModal(eventDetails) {
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden";
+            submitButton.innerHTML = "Update Event";
+            submitButton.name = "update-event-submit";
+            modalTitle.innerText = "Update Event";
 
-                document.getElementById("event-id").value = eventDetails.ID;
-                document.getElementById("edit-event-name").value = eventDetails.Event_Name;
-                document.getElementById("edit-event-date").value = eventDetails.Date_of_Event;
-                document.getElementById("edit-event-cost").value = eventDetails.Cost_of_Event;
-                document.getElementById("edit-event-approved").checked = eventDetails.Approval_of_Event == 1;
-                document.getElementById("edit-event-status").value = eventDetails.Status_of_Event;
+            document.getElementById("event-id").value = eventDetails.ID;
+            document.getElementById("edit-event-name").value = eventDetails.Event_Name;
+            document.getElementById("edit-event-date").value = eventDetails.Date_of_Event;
+            document.getElementById("edit-event-cost").value = eventDetails.Cost_of_Event;
+            document.getElementById("edit-event-approved").checked = eventDetails.Approval_of_Event == 1;
+            document.getElementById("edit-event-status").value = eventDetails.Status_of_Event;
 
-            };
-        });
+            var users = <?php echo json_encode($users); ?>;
+            var checkboxes = document.getElementsByName("users[]");
+            checkboxes.forEach((checkbox) => {
+                var userID = parseInt(checkbox.value);
+                if (eventDetails.members.includes(userID)) {
+                    checkbox.checked = true;
+                } else {
+                    checkbox.checked = false;
+                }
+            });
+            console.log(eventDetails);
+        }
 
-        // Open modal for adding
-        addButton.onclick = function () {
+        // Function to handle opening the modal for adding a new event
+        function openAddModal() {
             modal.style.display = "block";
             document.body.style.overflow = "hidden";
             document.getElementById("update-event-form").reset();
             submitButton.innerHTML = "Add Event";
             submitButton.name = "add-event-submit";
             modalTitle.innerText = "Add New Event";
-            // Clear the event-id since this is for adding a new event
             document.getElementById("event-id").value = "";
+
+            var checkboxes = document.getElementsByName("users[]");
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = false;
+            });
+        }
+
+        // Open modal for editing when clicking on edit icon
+        var editButtons = document.querySelectorAll(".edit-icon");
+        editButtons.forEach((button) => {
+            button.onclick = function () {
+                var eventDetails = JSON.parse(this.getAttribute("data-event-details"));
+                openEditModal(eventDetails);
+            };
+        });
+
+        // Open modal for adding new event when clicking on add event button
+        addButton.onclick = function () {
+            openAddModal();
         };
 
         // Close modal

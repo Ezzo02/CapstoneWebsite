@@ -20,7 +20,7 @@ $EventsModel = new EventsModel($conn);
 require_once("./php/controllers/UsersController.php");
 require_once("./php/controllers/EventsController.php");
 $UserController = new UserController($UserModel);
-$EventsController = new EventsController($EventsModel);
+$EventsController = new EventsController($EventsModel,$UserModel);
 
 // echo $route;
 switch ($route) {

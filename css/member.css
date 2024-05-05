@@ -88,6 +88,8 @@ section {
     color: #fff;
     background-color: #B71C1C; /* Red background color */
     border-radius: 10px; /* Added border radius */
+    width: 60%;
+    transition: all 2s ease;
 }
 
 .red-button {

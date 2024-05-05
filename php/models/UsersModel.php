@@ -12,6 +12,23 @@ class UserModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function  getUsers(){
+        try {
+
+            $sql = "SELECT * From users";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $rows; 
+        } catch (Exception $e) {
+            // echo $sql . "<br>" . $e->getMessage();
+            return false;
+        }
+
+    }
+
 
     public function loginUser($user)
     {

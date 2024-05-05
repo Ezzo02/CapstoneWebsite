@@ -3,14 +3,15 @@
 class EventsController
 {
     private $eventsModel;
-
-    public function __construct(EventsModel $eventsModel)
+    private $usersModel;
+    public function __construct(EventsModel $eventsModel, UserModel $userModel)
     {
         $this->eventsModel = $eventsModel;
+        $this->usersModel = $userModel;
     }
 
-    public function Events_Add_Update(){
-        $events = $this->eventsModel->getEvents();
+    public function Events_Add_Update()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $eventName = $_POST['event-name'];
             $eventDate = $_POST['event-date'];
@@ -21,10 +22,12 @@ class EventsController
             if (isset($_POST['add-event-submit'])) {
                 
                 $result = $this->eventsModel->addEvent($eventName, $eventDate, $eventCost, $eventStatus, $eventApproved);
-                    
                 if ($result) {
-                } 
-                else {
+                    $eventID = $this->eventsModel->searchEventByName($eventName)['ID'];
+                    $users = isset($_POST['users']) ? $_POST['users'] : [];
+                    $this->eventsModel->addMembersToEvent($eventID, $users);
+
+                } else {
                     // header('Location: error_page.php'); // Redirect on error
                 }
                 header('Location: /CapstoneWebsite/events'); // Redirect on success
@@ -32,16 +35,20 @@ class EventsController
                 $eventId = $_POST['event-id'];
                 $result = $this->eventsModel->updateEvent($eventId, $eventName, $eventDate, $eventCost, $eventStatus, $eventApproved);
                 if ($result) {
+                    $users = isset($_POST['users']) ? $_POST['users'] : [];
+                    $this->eventsModel->addMembersToEvent($eventId, $users);
+                    
                     // header('Location: success_page.php'); // Redirect on success
                 } else {
                     // header('Location: error_page.php'); // Redirect on error
                 }
-                header('Location: /CapstoneWebsite/events'); // Redirect on success
-            
+                //header('Location: /CapstoneWebsite/events'); // Redirect on success
+                
             }
-        }
-        else{
-            include_once("php/views/events.php");
+        } else {
+            $events = $this->eventsModel->getEventswithMembers();
+            $users = $this->usersModel->getUsers();
+            include_once ("php/views/events.php");
         }
     }
 }
