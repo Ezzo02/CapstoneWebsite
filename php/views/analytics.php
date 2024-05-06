@@ -133,7 +133,7 @@
                     borderColor: 'rgba(255, 206, 86, 1)',
                     yAxisID: 'y',
                 }, {
-                    label: 'Costs',
+                    label: 'Costs ($)',
                     data: costs,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -152,6 +152,15 @@
                         type: 'linear',
                         display: true,
                         position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Number of Events',
+                            color: '#e1242b',
+                            font: { 
+                                size: 14,
+                                weight: 'bold',
+                            }
+                        }
                     },
                     y1: {
                         type: 'linear',
@@ -160,6 +169,15 @@
                         grid: {
                             drawOnChartArea: false,
                         },
+                        title: {
+                            display: true,
+                            text: 'Costs ($)',
+                            color: '#e1242b', 
+                            font: { 
+                                size: 14,
+                                weight: 'bold',
+                            }
+                        }
                     },
                     y2: {
                         type: 'linear',
@@ -168,10 +186,26 @@
                         grid: {
                             drawOnChartArea: false,
                         },
+                        title: {
+                            display: true,
+                            text: 'Cumulative Members',
+                            color: '#e1242b', 
+                            font: { 
+                                size: 14,
+                                weight: 'bold',
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
                     }
                 }
             }
         });
+
 
     </script>
     <script src="javascript/dashboard.js"></script>
