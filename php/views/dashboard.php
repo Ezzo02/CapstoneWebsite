@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li>
-                <a href="analytics.html">
+                <a href="/CapstoneWebsite/analytics">
                     <i class='bx bxs-doughnut-chart'></i>
                     <span class="text">Analytics</span>
                 </a>

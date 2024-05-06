@@ -150,7 +150,7 @@ body {
 	transition: width .3s ease;
 }
 #sidebar .side-menu li a.logout {
-	color: var(--red);
+	/* color: var(--red); */
 }
 #sidebar .side-menu.top li a:hover {
 	color: var(--blue);
@@ -548,80 +548,6 @@ body {
 }
 
 
-/* CSS for the modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-/* CSS for the modal content */
-.modal-content {
-    background-color: #fefefe;
-    margin: 20% auto; /* Increased margin for better centering */
-    padding: 10px; /* Reduced padding */
-    border: 1px solid #888;
-    width: 60%; /* Reduced width */
-    max-width: 300px; /* Max width for smaller screens */
-    border-radius: 10px;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* CSS for the close button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* CSS for the input labels */
-.modal-content label {
-    margin-bottom: 5px;
-    display: block;
-}
-
-/* CSS for the input boxes */
-.modal-content input[type="text"],
-.modal-content input[type="password"],
-.modal-content input[type="date"],
-.modal-content select {
-    width: 100%;
-    padding: 8px; /* Reduced padding */
-    margin-bottom: 15px; /* Reduced margin */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px; /* Reduced font size */
-}
-
-/* CSS for the submit button */
-.add-member-btn {
-    background-color: #e1242b;
-    color: white;
-    padding: 10px 16px; /* Reduced padding */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px; /* Reduced font size */
-}
-
-.add-member-btn:hover {
-    background-color: #DB504A;
-}
 
 
 

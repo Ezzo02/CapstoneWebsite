@@ -151,4 +151,62 @@ class EventsModel
             return false;
         }
     }
+
+
+    public function EventsVSMembersVSCosts()
+    {
+
+
+        try {
+            $stmt = $this->db->prepare("WITH MonthlyMembers AS (
+                SELECT
+                    YEAR(`Joining Date`) AS Year,
+                    MONTH(`Joining Date`) AS Month,
+                    COUNT(DISTINCT ID) AS NewMembers
+                FROM
+                    users
+                GROUP BY
+                    YEAR(`Joining Date`), MONTH(`Joining Date`)
+            ),
+            CumulativeMembers AS (
+                SELECT
+                    m.Year,
+                    m.Month,
+                    SUM(m.NewMembers) OVER (ORDER BY m.Year, m.Month) AS CumulativeCount
+                FROM
+                    MonthlyMembers m
+            )
+            SELECT
+                e.Year,
+                e.Month,
+                IFNULL(e.NumberOfEvents, 0) AS NumberOfEvents,
+                IFNULL(e.Costs, 0) AS Costs,
+                IFNULL(cm.CumulativeCount, 0) AS CumulativeMembers
+            FROM
+                (SELECT 
+                    YEAR(Date_of_Event) AS Year,
+                    MONTH(Date_of_Event) AS Month,
+                    COUNT(*) AS NumberOfEvents,
+                    SUM(Cost_of_Event) AS Costs
+                 FROM 
+                    events
+                 GROUP BY 
+                    YEAR(Date_of_Event), MONTH(Date_of_Event)
+                ) e
+            LEFT JOIN 
+                CumulativeMembers cm ON e.Year = cm.Year AND e.Month = cm.Month
+            ORDER BY
+                e.Year ASC, e.Month ASC;
+            ");
+
+            $stmt->execute();
+            $events_statistics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $events_statistics;
+        } catch (PDOException $e) {
+            return [];
+        }
+
+
+
+    }
 }

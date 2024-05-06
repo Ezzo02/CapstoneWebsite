@@ -10,6 +10,30 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="css/dashboard.css" />
     <style>
+
+        /* head styles for search bar */
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #searchInput {
+            border: 1px solid gray !important;
+            height: 50px !important;
+            padding: 20px;
+            border-radius: 10px;
+            margin-right: 2rem;
+            font-size: 15px;
+            width: 300px;
+        }
+
+        #searchInput:focus {
+            /* border: 1px solid #e1242b; */
+            outline: 2px solid #e1242b;
+        }
+
+        /*  */
         .table-data .head-events {
             text-align: center;
         }
@@ -127,9 +151,9 @@
             color: white;
         }
 
-        .table-data .order table tbody tr:nth-child(odd) {
+        /* .table-data .order table tbody tr:nth-child(odd) {
             background-color: #f9f9f9;
-        }
+        } */
 
         .table-data .order table tbody tr:hover {
             cursor: pointer;
@@ -206,7 +230,7 @@
                 </a>
             </li>
             <li>
-                <a href="analytics.html">
+                <a href="/CapstoneWebsite/analytics">
                     <i class="bx bxs-doughnut-chart"></i>
                     <span class="text">Analytics</span>
                 </a>
@@ -291,12 +315,11 @@
             <!-- TABLE DATA -->
             <div class="table-data">
                 <div class="order">
-                    <div class="head">
-                        <h3>New Members</h3>
-                        <i class="bx bx-search"></i>
-                        <i class="bx bx-filter"></i>
+                    <div class="head" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3>Current Members</h3>
+                        <input type="text" id="searchInput" placeholder="Search Members...">
                     </div>
-                    <table>
+                    <table id="membersTable">
                         <thead>
                             <tr>
                                 <th>Username</th>
@@ -414,6 +437,27 @@
         var modifyButton = document.querySelector('.red-button');
         modifyButton.addEventListener('click', function () {
             openModal();
+        });
+
+
+                // functionality of search bar
+
+                document.getElementById('searchInput').addEventListener('keyup', function () {
+            var searchValue = this.value.toLowerCase();
+            var table = document.getElementById('membersTable'); // Ensure your table has this ID
+            var tr = table.getElementsByTagName('tr');
+
+            for (var i = 0; i < tr.length; i++) {
+                var td = tr[i].getElementsByTagName('td')[0]; // Assuming event names are in the first column
+                if (td) {
+                    var txtValue = td.textContent || td.innerText;
+                    if (txtValue.toLowerCase().indexOf(searchValue) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
         });
 
     </script>

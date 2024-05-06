@@ -72,6 +72,15 @@ switch ($route) {
     case 'addMember':
         $UserController->addMember();
         break;
+    case 'analytics':
+        session_start();
+        if(empty($_SESSION['role'])){
+            header('Location:/CapstoneWebsite/login');
+            break;    
+        }
+        $events_statistics = $EventsModel->EventsVSMembersVSCosts();
+        include_once("php/views/analytics.php");
+        break;
     default:
         http_response_code(404);
         echo '404 Not Found';

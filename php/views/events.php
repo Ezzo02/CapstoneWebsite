@@ -13,6 +13,29 @@
     <!-- stylings -->
 
     <style>
+        /* head styles for search bar */
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #searchInput {
+            border: 1px solid gray !important;
+            height: 50px !important;
+            padding: 20px;
+            border-radius: 10px;
+            margin-right: 2rem;
+            font-size: 15px;
+            width: 300px;
+        }
+
+        #searchInput:focus {
+            /* border: 1px solid #e1242b; */
+            outline: 2px solid #e1242b;
+        }
+
+        /*  */
         .table-data .head-events {
             text-align: center;
         }
@@ -130,9 +153,9 @@
             color: white;
         }
 
-        .table-data .order table tbody tr:nth-child(odd) {
+        /* .table-data .order table tbody tr:nth-child(odd) {
             background-color: #f9f9f9;
-        }
+        } */
 
         .table-data .order table tbody tr:hover {
             cursor: pointer;
@@ -161,7 +184,7 @@
             left: 35vw;
 
             min-width: 400px;
-            width: 500px;
+            width: 400px;
             /* height: 100%; */
             overflow: auto;
             /* background-color: rgb(0, 0, 0); */
@@ -173,7 +196,7 @@
             margin: auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
+            width: 100%;
         }
 
         .close {
@@ -225,7 +248,7 @@
                 </a>
             </li>
             <li>
-                <a href="analytics.html">
+                <a href="/CapstoneWebsite/analytics">
                     <i class="bx bxs-doughnut-chart"></i>
                     <span class="text">Analytics</span>
                 </a>
@@ -239,7 +262,7 @@
             </li>
             <li class="active">
                 <a href="/CapstoneWebsite/members">
-                <i class="bx bxs-calendar"></i>
+                    <i class="bx bxs-calendar"></i>
                     <span class="text">Events</span>
                 </a>
             </li>
@@ -289,18 +312,37 @@
 
         <!-- MAIN -->
         <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Events Page</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Events</a>
+                        </li>
+                        <li><i class="bx bx-chevron-right"></i></li>
+                        <li>
+                            <a class="active" href="#">Home</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
             <div class="table-data">
                 <div class="order">
-                    <div class="head-events">
+                    <!-- <div class="head-events">
                         <h3>Manage Events Page</h3>
-                    </div>
+                    </div> -->
                     <!-- events table -->
                     <div class="table-data">
                         <div class="order">
-                            <div class="head">
+                            <div class="head"
+                                style="display: flex; justify-content: space-between; align-items: center;">
                                 <h3>Current Events</h3>
+                                <input type="text" id="searchInput" placeholder="Search events..."
+                                    style="height: 20px;">
                             </div>
-                            <table>
+
+                            <table id="eventsTable">
                                 <thead>
                                     <tr>
                                         <th>Event Name</th>
@@ -479,6 +521,26 @@
                 document.body.style.overflow = "auto";
             }
         };
+
+        // functionality of search bar
+
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            var searchValue = this.value.toLowerCase();
+            var table = document.getElementById('eventsTable'); // Ensure your table has this ID
+            var tr = table.getElementsByTagName('tr');
+
+            for (var i = 0; i < tr.length; i++) {
+                var td = tr[i].getElementsByTagName('td')[0]; // Assuming event names are in the first column
+                if (td) {
+                    var txtValue = td.textContent || td.innerText;
+                    if (txtValue.toLowerCase().indexOf(searchValue) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        });
     </script>
 </body>
 
