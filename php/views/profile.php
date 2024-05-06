@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
 
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
@@ -158,6 +160,11 @@
 <body>
 
     <section>
+        <a href="/CapstoneWebsite/logout">
+            <i class='bx bxs-log-out'
+                style="position: absolute;top: px;right: 6.5rem;font-size: 50px;color: #e1242b;cursor:pointer;">
+            </i>
+        </a>
         <div class="profile py-4">
             <div class="container">
                 <div class="row">
