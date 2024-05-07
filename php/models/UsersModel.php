@@ -103,7 +103,7 @@ class UserModel
             $updateFields[] = "`Birthday` = '$birthday'";
         }
         if (!empty($emergencyContact)) {
-            $updateFields[] = "`Emergency Contact` = '$emergencyContact'";
+            $updateFields[] = "`Emergancy Contact` = '$emergencyContact'";
         }
         if (!empty($bloodType)) {
             $updateFields[] = "`Blood Type` = '$bloodType'";
